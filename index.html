@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Reframe Room</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      background: #D6EAE4;
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .lagoon-bg {
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 40% at 50% 0%, #A8D8D0 0%, transparent 70%),
+        radial-gradient(ellipse 60% 30% at 20% 80%, #7BA89A 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 85% 70%, #5C8A7A 0%, transparent 55%),
+        radial-gradient(ellipse 70% 50% at 60% 40%, #C8E0D8 0%, transparent 65%);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.6;
+    }
+
+    .sand-strip {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      height: 220px;
+      background: linear-gradient(to top, #E8DFC8 0%, #D4C9A8 40%, transparent 100%);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.5;
+    }
+
+    .slate-rock-1 { position: fixed; bottom: 60px; left: -30px; width: 180px; height: 90px; background: #7A8A8E; border-radius: 50% 60% 40% 55%; opacity: 0.18; pointer-events: none; z-index: 0; }
+    .slate-rock-2 { position: fixed; bottom: 30px; right: -20px; width: 140px; height: 70px; background: #6A7A7E; border-radius: 60% 40% 55% 45%; opacity: 0.15; pointer-events: none; z-index: 0; }
+    .slate-rock-3 { position: fixed; top: 120px; right: -40px; width: 120px; height: 60px; background: #7A8A8E; border-radius: 45% 55% 50% 60%; opacity: 0.12; pointer-events: none; z-index: 0; }
+
+    .vine-left { position: fixed; top: 0; left: 0; width: 80px; height: 100%; pointer-events: none; z-index: 0; opacity: 0.12; background: repeating-linear-gradient(175deg, transparent 0px, transparent 18px, #2D5A40 18px, #2D5A40 20px); }
+    .vine-right { position: fixed; top: 0; right: 0; width: 60px; height: 100%; pointer-events: none; z-index: 0; opacity: 0.09; background: repeating-linear-gradient(185deg, transparent 0px, transparent 22px, #3A6B50 22px, #3A6B50 24px); }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 72px 32px 100px;
+    }
+
+    .room-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: 13px;
+      letter-spacing: 0.24em;
+      color: #2D6B5A;
+      text-transform: uppercase;
+      margin-bottom: 48px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .room-name::after { content: ''; flex: 1; height: 0.5px; background: #6AADA0; opacity: 0.5; }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: 52px;
+      line-height: 1.1;
+      color: #1A3530;
+      margin-bottom: 22px;
+      letter-spacing: -0.01em;
+    }
+    h1 em { font-style: italic; color: #3D8A78; }
+
+    .invitation {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 19px;
+      line-height: 1.8;
+      color: #2A5048;
+      margin-bottom: 52px;
+      font-weight: 300;
+      font-style: italic;
+    }
+
+    .input-area {
+      background: rgba(255, 252, 245, 0.82);
+      border: 0.5px solid #8ABFB5;
+      border-radius: 3px;
+      padding: 24px 28px;
+      margin-bottom: 10px;
+    }
+
+    textarea {
+      width: 100%;
+      background: transparent;
+      border: none;
+      outline: none;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 19px;
+      line-height: 1.7;
+      color: #1A3530;
+      resize: none;
+      font-weight: 400;
+      min-height: 160px;
+      caret-color: #2D6B5A;
+    }
+    textarea::placeholder { color: #7AADA0; font-style: italic; }
+
+    .input-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+      padding: 0 2px;
+    }
+
+    .word-count { font-size: 12px; color: #6A9A90; letter-spacing: 0.05em; }
+    .word-count.near { color: #A07840; }
+    .word-count.over { color: #8B3020; }
+
+    .enter-btn {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #F0F8F5;
+      background: #1E5C4A;
+      border: none;
+      padding: 14px 36px;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .enter-btn:hover { background: #143D30; }
+    .enter-btn:active { transform: scale(0.98); }
+    .enter-btn:disabled { background: #7AADA0; cursor: not-allowed; }
+
+    .divider { height: 0.5px; background: #6AADA0; margin: 52px 0; opacity: 0; transition: opacity 0.6s; }
+    .divider.visible { opacity: 0.4; }
+
+    .loading-dots { display: none; gap: 8px; align-items: center; justify-content: center; padding: 40px 0; }
+    .loading-dots.active { display: flex; }
+
+    .dot { width: 6px; height: 6px; border-radius: 50%; background: #3D8A78; animation: pulse 1.6s ease-in-out infinite; }
+    .dot:nth-child(2) { animation-delay: 0.25s; }
+    .dot:nth-child(3) { animation-delay: 0.5s; }
+
+    @keyframes pulse {
+      0%, 80%, 100% { opacity: 0.25; transform: scale(0.75); }
+      40% { opacity: 1; transform: scale(1); }
+    }
+
+    .paths-section { opacity: 0; transform: translateY(16px); transition: opacity 0.7s, transform 0.7s; }
+    .paths-section.visible { opacity: 1; transform: translateY(0); }
+
+    .paths-label {
+      font-family: 'Jost', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      color: #2D6B5A;
+      text-transform: uppercase;
+      margin-bottom: 36px;
+    }
+
+    .path-card {
+      background: rgba(255, 252, 242, 0.65);
+      border: 0.5px solid #8ABFB5;
+      border-radius: 3px;
+      padding: 32px 36px;
+      margin-bottom: 20px;
+    }
+    .path-card:last-child { margin-bottom: 0; }
+
+    .path-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: 28px;
+      color: #1E5C4A;
+      margin-bottom: 16px;
+    }
+
+    .path-body {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      line-height: 1.85;
+      color: #243830;
+      font-weight: 300;
+    }
+    .path-body p { margin-bottom: 14px; }
+    .path-body p:last-child { margin-bottom: 0; }
+
+    .error-msg {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      color: #5A7A70;
+      font-size: 17px;
+      padding: 20px 0;
+    }
+
+    .footer-note {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14px;
+      font-style: italic;
+      color: #5A8A80;
+      text-align: center;
+      margin-top: 64px;
+      padding-top: 32px;
+      border-top: 0.5px solid rgba(106,173,160,0.4);
+    }
+
+    .reset-btn {
+      display: none;
+      background: none;
+      border: 0.5px solid #6AADA0;
+      color: #2A5048;
+      font-family: 'Jost', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 11px 28px;
+      cursor: pointer;
+      border-radius: 2px;
+      margin: 36px auto 0;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .reset-btn:hover { border-color: #1E5C4A; color: #1A3530; }
+    .reset-btn.visible { display: block; }
+  </style>
+</head>
+<body>
+
+  <div class="lagoon-bg"></div>
+  <div class="sand-strip"></div>
+  <div class="slate-rock-1"></div>
+  <div class="slate-rock-2"></div>
+  <div class="slate-rock-3"></div>
+  <div class="vine-left"></div>
+  <div class="vine-right"></div>
+
+  <div class="content">
+    <div class="room-name">The Reframe Room</div>
+
+    <h1>What are you<br><em>sitting with?</em></h1>
+
+    <p class="invitation">
+      Bring something real. A crossroads, a question, a weight you've been carrying.<br>
+      No judgment lives here — only possibilities.
+    </p>
+
+    <div class="input-area">
+      <textarea id="scenario" placeholder="Describe your situation or question..."></textarea>
+    </div>
+
+    <div class="input-footer">
+      <span class="word-count" id="wordCount">0 / 500 words</span>
+      <button class="enter-btn" id="enterBtn">Enter the room</button>
+    </div>
+
+    <div class="divider" id="divider"></div>
+
+    <div class="loading-dots" id="loadingDots">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+
+    <div class="paths-section" id="pathsSection">
+      <p class="paths-label">Three paths appear</p>
+      <div id="pathsContainer"></div>
+      <button class="reset-btn" id="resetBtn">Begin again</button>
+    </div>
+
+    <p class="footer-note">These are possibilities, not prescriptions. What you do with them is entirely yours.</p>
+  </div>
+
+  <script>
+    const WORKER_URL = 'https://reframe-room.lawrence-carrillo.workers.dev';
+
+    const SYSTEM_PROMPT = `You are The Reframe Room — a quietly curious thinking space. You are not a therapist, advisor, fortune teller, or decision-maker. You are a holder of possibilities.
+
+When a user shares a scenario or dilemma, your only job is to generate three distinct hypothetical paths they might consider. Each path should be specific and vivid enough to feel real, framed as possibility never prescription, honest about both realistic upsides and downsides, and completely neutral — no path is better, safer, bolder, or recommended.
+
+Never assume anything about who the user is — their age, gender, background, or identity.
+
+Never diagnose. Never prescribe. Never moralize.
+
+If a scenario suggests a crisis, emergency, or immediate danger, do not generate paths. Instead respond warmly and briefly — acknowledge them, and gently encourage them to reach out to a trusted person or appropriate professional support.
+
+Your tone is quietly curious. Warm but not coddling. Empathetic but neutral. Thoughtful but never heavy-handed.
+
+Format your response as exactly three paths. Each path has a short abstract evocative title — no numbers, no letters, no ordering language. Titles should feel like they belong to the same world, sharing quiet resonance without forcing a rhyme. Follow each title with 2-3 paragraphs exploring that possibility.
+
+Use this exact format:
+TITLE: [evocative title]
+BODY: [2-3 paragraphs]
+
+TITLE: [evocative title]
+BODY: [2-3 paragraphs]
+
+TITLE: [evocative title]
+BODY: [2-3 paragraphs]`;
+
+    const textarea = document.getElementById('scenario');
+    const wordCountEl = document.getElementById('wordCount');
+    const enterBtn = document.getElementById('enterBtn');
+    const divider = document.getElementById('divider');
+    const loadingDots = document.getElementById('loadingDots');
+    const pathsSection = document.getElementById('pathsSection');
+    const pathsContainer = document.getElementById('pathsContainer');
+    const resetBtn = document.getElementById('resetBtn');
+
+    function countWords(text) {
+      return text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
+    }
+
+    textarea.addEventListener('input', () => {
+      const words = countWords(textarea.value);
+      wordCountEl.textContent = words + ' / 500 words';
+      wordCountEl.className = 'word-count' + (words > 450 ? ' near' : '') + (words > 500 ? ' over' : '');
+      enterBtn.disabled = words === 0 || words > 500;
+    });
+
+    enterBtn.addEventListener('click', handleSubmit);
+    resetBtn.addEventListener('click', handleReset);
+
+    async function handleSubmit() {
+      const scenario = textarea.value.trim();
+      if (!scenario) return;
+
+      enterBtn.disabled = true;
+      textarea.disabled = true;
+      divider.classList.add('visible');
+      loadingDots.classList.add('active');
+      pathsSection.classList.remove('visible');
+      pathsContainer.innerHTML = '';
+      resetBtn.classList.remove('visible');
+
+      try {
+        const response = await fetch(WORKER_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            model: 'claude-sonnet-4-6',
+            max_tokens: 1000,
+            system: SYSTEM_PROMPT,
+            messages: [{ role: 'user', content: scenario }]
+          })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error?.message || 'API error ' + response.status);
+        }
+
+        const text = data.content?.find(b => b.type === 'text')?.text || '';
+        if (!text) throw new Error('Empty response');
+        renderPaths(text);
+
+      } catch (err) {
+        pathsContainer.innerHTML = `<p class="error-msg">Something quiet went wrong — ${err.message}. Take a breath and try again.</p>`;
+        pathsSection.classList.add('visible');
+        resetBtn.classList.add('visible');
+      }
+
+      loadingDots.classList.remove('active');
+    }
+
+    function renderPaths(text) {
+      const blocks = text.split(/(?=TITLE:)/g).filter(b => b.trim());
+      const paths = blocks.map(block => {
+        const titleMatch = block.match(/TITLE:\s*(.+)/);
+        const bodyMatch = block.match(/BODY:\s*([\s\S]+)/);
+        return {
+          title: titleMatch ? titleMatch[1].trim() : '',
+          body: bodyMatch ? bodyMatch[1].trim() : block.replace(/TITLE:.+/, '').trim()
+        };
+      }).filter(p => p.title);
+
+      if (paths.length === 0) {
+        pathsContainer.innerHTML = `<p class="error-msg">The room is still forming. Try again in a moment.</p>`;
+      } else {
+        pathsContainer.innerHTML = paths.map(p => `
+          <div class="path-card">
+            <h2 class="path-title">${p.title}</h2>
+            <div class="path-body">${p.body.split(/\n\n+/).map(para => `<p>${para.trim()}</p>`).join('')}</div>
+          </div>
+        `).join('');
+      }
+
+      pathsSection.classList.add('visible');
+      resetBtn.classList.add('visible');
+    }
+
+    function handleReset() {
+      textarea.value = '';
+      textarea.disabled = false;
+      wordCountEl.textContent = '0 / 500 words';
+      wordCountEl.className = 'word-count';
+      enterBtn.disabled = false;
+      divider.classList.remove('visible');
+      pathsSection.classList.remove('visible');
+      resetBtn.classList.remove('visible');
+      pathsContainer.innerHTML = '';
+      loadingDots.classList.remove('active');
+    }
+  </script>
+
+</body>
+</html>
