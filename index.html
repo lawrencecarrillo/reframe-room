@@ -11,7 +11,7 @@
 
     body {
       min-height: 100vh;
-      background: #D6EAE4;
+      background: #C8D4DC;
       font-family: 'Jost', sans-serif;
       font-weight: 300;
       position: relative;
@@ -22,31 +22,32 @@
       position: fixed;
       inset: 0;
       background:
-        radial-gradient(ellipse 80% 40% at 50% 0%, #A8D8D0 0%, transparent 70%),
-        radial-gradient(ellipse 60% 30% at 20% 80%, #7BA89A 0%, transparent 60%),
-        radial-gradient(ellipse 50% 40% at 85% 70%, #5C8A7A 0%, transparent 55%),
-        radial-gradient(ellipse 70% 50% at 60% 40%, #C8E0D8 0%, transparent 65%);
+        radial-gradient(ellipse 80% 45% at 50% 0%, #8AACBE 0%, transparent 70%),
+        radial-gradient(ellipse 60% 35% at 15% 75%, #6A8EA0 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 88% 65%, #5A7E90 0%, transparent 55%),
+        radial-gradient(ellipse 70% 50% at 55% 45%, #A0BCCC 0%, transparent 65%);
       pointer-events: none;
       z-index: 0;
-      opacity: 0.6;
+      opacity: 0.7;
     }
 
     .sand-strip {
       position: fixed;
       bottom: 0; left: 0; right: 0;
-      height: 220px;
-      background: linear-gradient(to top, #E8DFC8 0%, #D4C9A8 40%, transparent 100%);
+      height: 200px;
+      background: linear-gradient(to top, #C8BA98 0%, #B8A880 35%, transparent 100%);
       pointer-events: none;
       z-index: 0;
-      opacity: 0.5;
+      opacity: 0.45;
     }
 
-    .slate-rock-1 { position: fixed; bottom: 60px; left: -30px; width: 180px; height: 90px; background: #7A8A8E; border-radius: 50% 60% 40% 55%; opacity: 0.18; pointer-events: none; z-index: 0; }
-    .slate-rock-2 { position: fixed; bottom: 30px; right: -20px; width: 140px; height: 70px; background: #6A7A7E; border-radius: 60% 40% 55% 45%; opacity: 0.15; pointer-events: none; z-index: 0; }
-    .slate-rock-3 { position: fixed; top: 120px; right: -40px; width: 120px; height: 60px; background: #7A8A8E; border-radius: 45% 55% 50% 60%; opacity: 0.12; pointer-events: none; z-index: 0; }
+    .slate-rock-1 { position: fixed; bottom: 55px; left: -35px; width: 190px; height: 95px; background: #6A7A84; border-radius: 50% 60% 40% 55%; opacity: 0.28; pointer-events: none; z-index: 0; }
+    .slate-rock-2 { position: fixed; bottom: 25px; right: -25px; width: 150px; height: 75px; background: #5A6C76; border-radius: 60% 40% 55% 45%; opacity: 0.25; pointer-events: none; z-index: 0; }
+    .slate-rock-3 { position: fixed; top: 110px; right: -35px; width: 130px; height: 65px; background: #6A7A84; border-radius: 45% 55% 50% 60%; opacity: 0.2; pointer-events: none; z-index: 0; }
+    .slate-rock-4 { position: fixed; top: 200px; left: -25px; width: 100px; height: 55px; background: #5A6C76; border-radius: 55% 45% 60% 40%; opacity: 0.18; pointer-events: none; z-index: 0; }
 
-    .vine-left { position: fixed; top: 0; left: 0; width: 80px; height: 100%; pointer-events: none; z-index: 0; opacity: 0.12; background: repeating-linear-gradient(175deg, transparent 0px, transparent 18px, #2D5A40 18px, #2D5A40 20px); }
-    .vine-right { position: fixed; top: 0; right: 0; width: 60px; height: 100%; pointer-events: none; z-index: 0; opacity: 0.09; background: repeating-linear-gradient(185deg, transparent 0px, transparent 22px, #3A6B50 22px, #3A6B50 24px); }
+    .vine-left { position: fixed; top: 0; left: 0; width: 70px; height: 100%; pointer-events: none; z-index: 0; opacity: 0.13; background: repeating-linear-gradient(175deg, transparent 0px, transparent 20px, #2A3A48 20px, #2A3A48 22px); }
+    .vine-right { position: fixed; top: 0; right: 0; width: 55px; height: 100%; pointer-events: none; z-index: 0; opacity: 0.11; background: repeating-linear-gradient(185deg, transparent 0px, transparent 24px, #3A4A58 24px, #3A4A58 26px); }
 
     .content {
       position: relative;
@@ -61,39 +62,39 @@
       font-weight: 300;
       font-size: 13px;
       letter-spacing: 0.24em;
-      color: #2D6B5A;
+      color: #2E4A60;
       text-transform: uppercase;
       margin-bottom: 48px;
       display: flex;
       align-items: center;
       gap: 12px;
     }
-    .room-name::after { content: ''; flex: 1; height: 0.5px; background: #6AADA0; opacity: 0.5; }
+    .room-name::after { content: ''; flex: 1; height: 0.5px; background: #7A9AAC; opacity: 0.6; }
 
     h1 {
       font-family: 'Cormorant Garamond', serif;
       font-weight: 300;
       font-size: 52px;
       line-height: 1.1;
-      color: #1A3530;
+      color: #141E28;
       margin-bottom: 22px;
       letter-spacing: -0.01em;
     }
-    h1 em { font-style: italic; color: #3D8A78; }
+    h1 em { font-style: italic; color: #2E5878; }
 
     .invitation {
       font-family: 'Cormorant Garamond', serif;
       font-size: 19px;
       line-height: 1.8;
-      color: #2A5048;
+      color: #2A3C4C;
       margin-bottom: 52px;
       font-weight: 300;
       font-style: italic;
     }
 
     .input-area {
-      background: rgba(255, 252, 245, 0.82);
-      border: 0.5px solid #8ABFB5;
+      background: rgba(240, 236, 226, 0.8);
+      border: 0.5px solid #7A9AAC;
       border-radius: 3px;
       padding: 24px 28px;
       margin-bottom: 10px;
@@ -107,13 +108,13 @@
       font-family: 'Cormorant Garamond', serif;
       font-size: 19px;
       line-height: 1.7;
-      color: #1A3530;
+      color: #141E28;
       resize: none;
       font-weight: 400;
       min-height: 160px;
-      caret-color: #2D6B5A;
+      caret-color: #2E4A60;
     }
-    textarea::placeholder { color: #7AADA0; font-style: italic; }
+    textarea::placeholder { color: #7A9AAC; font-style: italic; }
 
     .input-footer {
       display: flex;
@@ -123,9 +124,9 @@
       padding: 0 2px;
     }
 
-    .word-count { font-size: 12px; color: #6A9A90; letter-spacing: 0.05em; }
-    .word-count.near { color: #A07840; }
-    .word-count.over { color: #8B3020; }
+    .word-count { font-size: 12px; color: #5A7A8C; letter-spacing: 0.05em; }
+    .word-count.near { color: #907040; }
+    .word-count.over { color: #7B2A1A; }
 
     .enter-btn {
       font-family: 'Jost', sans-serif;
@@ -133,25 +134,25 @@
       font-size: 13px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: #F0F8F5;
-      background: #1E5C4A;
+      color: #E8EDF2;
+      background: #1A3A52;
       border: none;
       padding: 14px 36px;
       cursor: pointer;
       border-radius: 2px;
       transition: background 0.2s, transform 0.1s;
     }
-    .enter-btn:hover { background: #143D30; }
+    .enter-btn:hover { background: #0E2438; }
     .enter-btn:active { transform: scale(0.98); }
-    .enter-btn:disabled { background: #7AADA0; cursor: not-allowed; }
+    .enter-btn:disabled { background: #7A9AAC; cursor: not-allowed; }
 
-    .divider { height: 0.5px; background: #6AADA0; margin: 52px 0; opacity: 0; transition: opacity 0.6s; }
-    .divider.visible { opacity: 0.4; }
+    .divider { height: 0.5px; background: #7A9AAC; margin: 52px 0; opacity: 0; transition: opacity 0.6s; }
+    .divider.visible { opacity: 0.5; }
 
     .loading-dots { display: none; gap: 8px; align-items: center; justify-content: center; padding: 40px 0; }
     .loading-dots.active { display: flex; }
 
-    .dot { width: 6px; height: 6px; border-radius: 50%; background: #3D8A78; animation: pulse 1.6s ease-in-out infinite; }
+    .dot { width: 6px; height: 6px; border-radius: 50%; background: #2E5878; animation: pulse 1.6s ease-in-out infinite; }
     .dot:nth-child(2) { animation-delay: 0.25s; }
     .dot:nth-child(3) { animation-delay: 0.5s; }
 
@@ -167,14 +168,14 @@
       font-family: 'Jost', sans-serif;
       font-size: 11px;
       letter-spacing: 0.22em;
-      color: #2D6B5A;
+      color: #2E4A60;
       text-transform: uppercase;
       margin-bottom: 36px;
     }
 
     .path-card {
-      background: rgba(255, 252, 242, 0.65);
-      border: 0.5px solid #8ABFB5;
+      background: rgba(240, 236, 226, 0.72);
+      border: 0.5px solid #7A9AAC;
       border-radius: 3px;
       padding: 32px 36px;
       margin-bottom: 20px;
@@ -185,7 +186,7 @@
       font-family: 'Cormorant Garamond', serif;
       font-weight: 400;
       font-size: 28px;
-      color: #1E5C4A;
+      color: #1A3A52;
       margin-bottom: 16px;
     }
 
@@ -193,7 +194,7 @@
       font-family: 'Cormorant Garamond', serif;
       font-size: 18px;
       line-height: 1.85;
-      color: #243830;
+      color: #1E2E3C;
       font-weight: 300;
     }
     .path-body p { margin-bottom: 14px; }
@@ -202,7 +203,7 @@
     .error-msg {
       font-family: 'Cormorant Garamond', serif;
       font-style: italic;
-      color: #5A7A70;
+      color: #5A7A8C;
       font-size: 17px;
       padding: 20px 0;
     }
@@ -211,18 +212,18 @@
       font-family: 'Cormorant Garamond', serif;
       font-size: 14px;
       font-style: italic;
-      color: #5A8A80;
+      color: #4A6A7C;
       text-align: center;
       margin-top: 64px;
       padding-top: 32px;
-      border-top: 0.5px solid rgba(106,173,160,0.4);
+      border-top: 0.5px solid rgba(122, 154, 172, 0.45);
     }
 
     .reset-btn {
       display: none;
       background: none;
-      border: 0.5px solid #6AADA0;
-      color: #2A5048;
+      border: 0.5px solid #7A9AAC;
+      color: #2A3C4C;
       font-family: 'Jost', sans-serif;
       font-size: 12px;
       letter-spacing: 0.15em;
@@ -233,7 +234,7 @@
       margin: 36px auto 0;
       transition: border-color 0.2s, color 0.2s;
     }
-    .reset-btn:hover { border-color: #1E5C4A; color: #1A3530; }
+    .reset-btn:hover { border-color: #1A3A52; color: #141E28; }
     .reset-btn.visible { display: block; }
   </style>
 </head>
@@ -244,6 +245,7 @@
   <div class="slate-rock-1"></div>
   <div class="slate-rock-2"></div>
   <div class="slate-rock-3"></div>
+  <div class="slate-rock-4"></div>
   <div class="vine-left"></div>
   <div class="vine-right"></div>
 
@@ -358,11 +360,7 @@ BODY: [2-3 paragraphs]`;
         });
 
         const data = await response.json();
-
-        if (!response.ok) {
-          throw new Error(data.error?.message || 'API error ' + response.status);
-        }
-
+        if (!response.ok) throw new Error(data.error?.message || 'API error ' + response.status);
         const text = data.content?.find(b => b.type === 'text')?.text || '';
         if (!text) throw new Error('Empty response');
         renderPaths(text);
