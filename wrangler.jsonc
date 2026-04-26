@@ -1,14 +1,9 @@
 {
-  "$schema": "node_modules/wrangler/config-schema.json",
   "name": "reframe-room",
+  "main": "index.js",
   "compatibility_date": "2026-04-26",
+  "compatibility_flags": ["nodejs_compat"],
   "observability": {
     "enabled": true
-  },
-  "assets": {
-    "directory": "."
-  },
-  "compatibility_flags": [
-    "nodejs_compat"
-  ]
+  }
 }
