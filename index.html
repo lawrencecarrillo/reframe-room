@@ -18,228 +18,232 @@
       overflow-x: hidden;
     }
 
+    /* ── Background layers ── */
     .lagoon-bg {
-      position: fixed;
-      inset: 0;
+      position: fixed; inset: 0;
       background:
         radial-gradient(ellipse 80% 45% at 50% 0%, #8AACBE 0%, transparent 70%),
         radial-gradient(ellipse 60% 35% at 15% 75%, #6A8EA0 0%, transparent 60%),
         radial-gradient(ellipse 50% 40% at 88% 65%, #5A7E90 0%, transparent 55%),
         radial-gradient(ellipse 70% 50% at 55% 45%, #A0BCCC 0%, transparent 65%);
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.7;
+      pointer-events: none; z-index: 0; opacity: 0.7;
     }
-
     .sand-strip {
-      position: fixed;
-      bottom: 0; left: 0; right: 0;
-      height: 200px;
+      position: fixed; bottom: 0; left: 0; right: 0; height: 200px;
       background: linear-gradient(to top, #C8BA98 0%, #B8A880 35%, transparent 100%);
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.45;
+      pointer-events: none; z-index: 0; opacity: 0.45;
     }
-
     .slate-rock-1 { position: fixed; bottom: 55px; left: -35px; width: 190px; height: 95px; background: #6A7A84; border-radius: 50% 60% 40% 55%; opacity: 0.28; pointer-events: none; z-index: 0; }
     .slate-rock-2 { position: fixed; bottom: 25px; right: -25px; width: 150px; height: 75px; background: #5A6C76; border-radius: 60% 40% 55% 45%; opacity: 0.25; pointer-events: none; z-index: 0; }
     .slate-rock-3 { position: fixed; top: 110px; right: -35px; width: 130px; height: 65px; background: #6A7A84; border-radius: 45% 55% 50% 60%; opacity: 0.2; pointer-events: none; z-index: 0; }
     .slate-rock-4 { position: fixed; top: 200px; left: -25px; width: 100px; height: 55px; background: #5A6C76; border-radius: 55% 45% 60% 40%; opacity: 0.18; pointer-events: none; z-index: 0; }
-
     .vine-left { position: fixed; top: 0; left: 0; width: 70px; height: 100%; pointer-events: none; z-index: 0; opacity: 0.13; background: repeating-linear-gradient(175deg, transparent 0px, transparent 20px, #2A3A48 20px, #2A3A48 22px); }
     .vine-right { position: fixed; top: 0; right: 0; width: 55px; height: 100%; pointer-events: none; z-index: 0; opacity: 0.11; background: repeating-linear-gradient(185deg, transparent 0px, transparent 24px, #3A4A58 24px, #3A4A58 26px); }
 
+    /* ── Layout ── */
     .content {
-      position: relative;
-      z-index: 1;
-      max-width: 700px;
-      margin: 0 auto;
+      position: relative; z-index: 1;
+      max-width: 700px; margin: 0 auto;
       padding: 72px 32px 100px;
     }
 
     .room-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      font-size: 13px;
-      letter-spacing: 0.24em;
-      color: #2E4A60;
-      text-transform: uppercase;
-      margin-bottom: 48px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
+      font-family: 'Cormorant Garamond', serif; font-weight: 300;
+      font-size: 13px; letter-spacing: 0.24em; color: #2E4A60;
+      text-transform: uppercase; margin-bottom: 48px;
+      display: flex; align-items: center; gap: 12px;
     }
     .room-name::after { content: ''; flex: 1; height: 0.5px; background: #7A9AAC; opacity: 0.6; }
 
     h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      font-size: 52px;
-      line-height: 1.1;
-      color: #141E28;
-      margin-bottom: 22px;
-      letter-spacing: -0.01em;
+      font-family: 'Cormorant Garamond', serif; font-weight: 300;
+      font-size: 52px; line-height: 1.1; color: #141E28;
+      margin-bottom: 22px; letter-spacing: -0.01em;
     }
     h1 em { font-style: italic; color: #2E5878; }
 
     .invitation {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 19px;
-      line-height: 1.8;
-      color: #2A3C4C;
-      margin-bottom: 52px;
-      font-weight: 300;
-      font-style: italic;
+      font-family: 'Cormorant Garamond', serif; font-size: 19px;
+      line-height: 1.8; color: #2A3C4C; margin-bottom: 52px;
+      font-weight: 300; font-style: italic;
     }
 
+    /* ── Step 1: Input ── */
     .input-area {
       background: rgba(240, 236, 226, 0.8);
-      border: 0.5px solid #7A9AAC;
-      border-radius: 3px;
-      padding: 24px 28px;
-      margin-bottom: 10px;
+      border: 0.5px solid #7A9AAC; border-radius: 3px;
+      padding: 24px 28px; margin-bottom: 10px;
     }
-
     textarea {
-      width: 100%;
-      background: transparent;
-      border: none;
-      outline: none;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 19px;
-      line-height: 1.7;
-      color: #141E28;
-      resize: none;
-      font-weight: 400;
-      min-height: 160px;
-      caret-color: #2E4A60;
+      width: 100%; background: transparent; border: none; outline: none;
+      font-family: 'Cormorant Garamond', serif; font-size: 19px;
+      line-height: 1.7; color: #141E28; resize: none; font-weight: 400;
+      min-height: 160px; caret-color: #2E4A60;
     }
     textarea::placeholder { color: #7A9AAC; font-style: italic; }
 
     .input-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 40px;
-      padding: 0 2px;
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 40px; padding: 0 2px;
     }
-
     .word-count { font-size: 12px; color: #5A7A8C; letter-spacing: 0.05em; }
     .word-count.near { color: #907040; }
     .word-count.over { color: #7B2A1A; }
 
+    /* ── Buttons ── */
     .enter-btn {
-      font-family: 'Jost', sans-serif;
-      font-weight: 300;
-      font-size: 13px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: #E8EDF2;
-      background: #1A3A52;
-      border: none;
-      padding: 14px 36px;
-      cursor: pointer;
-      border-radius: 2px;
+      font-family: 'Jost', sans-serif; font-weight: 300; font-size: 13px;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: #E8EDF2; background: #1A3A52; border: none;
+      padding: 14px 36px; cursor: pointer; border-radius: 2px;
       transition: background 0.2s, transform 0.1s;
     }
     .enter-btn:hover { background: #0E2438; }
     .enter-btn:active { transform: scale(0.98); }
     .enter-btn:disabled { background: #7A9AAC; cursor: not-allowed; }
 
+    .reset-btn {
+      display: none; background: none; border: 0.5px solid #7A9AAC;
+      color: #2A3C4C; font-family: 'Jost', sans-serif;
+      font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase;
+      padding: 11px 28px; cursor: pointer; border-radius: 2px;
+      margin: 36px auto 0; transition: border-color 0.2s, color 0.2s;
+    }
+    .reset-btn:hover { border-color: #1A3A52; color: #141E28; }
+    .reset-btn.visible { display: block; }
+
+    /* ── Divider & loading ── */
     .divider { height: 0.5px; background: #7A9AAC; margin: 52px 0; opacity: 0; transition: opacity 0.6s; }
     .divider.visible { opacity: 0.5; }
 
     .loading-dots { display: none; gap: 8px; align-items: center; justify-content: center; padding: 40px 0; }
     .loading-dots.active { display: flex; }
-
     .dot { width: 6px; height: 6px; border-radius: 50%; background: #2E5878; animation: pulse 1.6s ease-in-out infinite; }
     .dot:nth-child(2) { animation-delay: 0.25s; }
     .dot:nth-child(3) { animation-delay: 0.5s; }
-
     @keyframes pulse {
       0%, 80%, 100% { opacity: 0.25; transform: scale(0.75); }
       40% { opacity: 1; transform: scale(1); }
     }
 
+    /* ── Step 2: Three paths ── */
     .paths-section { opacity: 0; transform: translateY(16px); transition: opacity 0.7s, transform 0.7s; }
     .paths-section.visible { opacity: 1; transform: translateY(0); }
 
     .paths-label {
-      font-family: 'Jost', sans-serif;
-      font-size: 11px;
-      letter-spacing: 0.22em;
-      color: #2E4A60;
-      text-transform: uppercase;
-      margin-bottom: 36px;
+      font-family: 'Jost', sans-serif; font-size: 11px;
+      letter-spacing: 0.22em; color: #2E4A60; text-transform: uppercase; margin-bottom: 36px;
     }
 
     .path-card {
       background: rgba(240, 236, 226, 0.72);
-      border: 0.5px solid #7A9AAC;
-      border-radius: 3px;
-      padding: 32px 36px;
-      margin-bottom: 20px;
+      border: 0.5px solid #7A9AAC; border-radius: 3px;
+      padding: 32px 36px; margin-bottom: 20px;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s, transform 0.15s;
+      position: relative;
+    }
+    .path-card:hover {
+      background: rgba(240, 236, 226, 0.92);
+      border-color: #2E5878;
+      transform: translateY(-2px);
     }
     .path-card:last-child { margin-bottom: 0; }
 
-    .path-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 400;
-      font-size: 28px;
-      color: #1A3A52;
-      margin-bottom: 16px;
+    .path-choose-hint {
+      font-family: 'Jost', sans-serif; font-size: 10px;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: #7A9AAC; position: absolute; top: 16px; right: 20px;
+      opacity: 0; transition: opacity 0.2s;
     }
+    .path-card:hover .path-choose-hint { opacity: 1; }
 
+    .path-title {
+      font-family: 'Cormorant Garamond', serif; font-weight: 400;
+      font-size: 28px; color: #1A3A52; margin-bottom: 16px;
+    }
     .path-body {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 18px;
-      line-height: 1.85;
-      color: #1E2E3C;
-      font-weight: 300;
+      font-family: 'Cormorant Garamond', serif; font-size: 18px;
+      line-height: 1.85; color: #1E2E3C; font-weight: 300;
     }
     .path-body p { margin-bottom: 14px; }
     .path-body p:last-child { margin-bottom: 0; }
 
-    .error-msg {
-      font-family: 'Cormorant Garamond', serif;
+    /* ── Step 3: Chosen path deep-dive ── */
+    .deepen-section { opacity: 0; transform: translateY(16px); transition: opacity 0.7s, transform 0.7s; margin-top: 8px; }
+    .deepen-section.visible { opacity: 1; transform: translateY(0); }
+
+    .chosen-label {
+      font-family: 'Jost', sans-serif; font-size: 11px;
+      letter-spacing: 0.22em; color: #2E4A60; text-transform: uppercase; margin-bottom: 12px;
+    }
+    .chosen-path-name {
+      font-family: 'Cormorant Garamond', serif; font-weight: 400;
+      font-size: 34px; color: #1A3A52; margin-bottom: 36px;
       font-style: italic;
-      color: #5A7A8C;
-      font-size: 17px;
-      padding: 20px 0;
     }
 
+    .deepen-card {
+      background: rgba(232, 228, 215, 0.78);
+      border: 0.5px solid #5A8AA0; border-radius: 3px;
+      padding: 36px 40px; margin-bottom: 20px;
+    }
+    .deepen-body {
+      font-family: 'Cormorant Garamond', serif; font-size: 18px;
+      line-height: 1.9; color: #1A2A38; font-weight: 300;
+    }
+    .deepen-body p { margin-bottom: 16px; }
+    .deepen-body p:last-child { margin-bottom: 0; }
+
+    /* ── Step 4: Closing ── */
+    .closing-section { opacity: 0; transform: translateY(16px); transition: opacity 0.7s, transform 0.7s; margin-top: 8px; }
+    .closing-section.visible { opacity: 1; transform: translateY(0); }
+
+    .closing-divider { height: 0.5px; background: #7A9AAC; margin: 44px 0; opacity: 0.4; }
+
+    .closing-card {
+      background: rgba(218, 228, 236, 0.55);
+      border: 0.5px solid #7A9AAC; border-radius: 3px;
+      padding: 36px 40px; text-align: center;
+    }
+    .closing-mark {
+      font-family: 'Cormorant Garamond', serif; font-size: 28px;
+      color: #7A9AAC; margin-bottom: 20px; opacity: 0.7;
+    }
+    .closing-body {
+      font-family: 'Cormorant Garamond', serif; font-size: 20px;
+      line-height: 1.85; color: #1E3244; font-weight: 300; font-style: italic;
+    }
+
+    /* ── Error ── */
+    .error-msg {
+      font-family: 'Cormorant Garamond', serif; font-style: italic;
+      color: #5A7A8C; font-size: 17px; padding: 20px 0;
+    }
+
+    /* ── Footer ── */
     .footer-note {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 14px;
-      font-style: italic;
-      color: #4A6A7C;
-      text-align: center;
-      margin-top: 64px;
-      padding-top: 32px;
+      font-family: 'Cormorant Garamond', serif; font-size: 14px;
+      font-style: italic; color: #4A6A7C; text-align: center;
+      margin-top: 64px; padding-top: 32px;
       border-top: 0.5px solid rgba(122, 154, 172, 0.45);
     }
 
-    .reset-btn {
-      display: none;
-      background: none;
-      border: 0.5px solid #7A9AAC;
-      color: #2A3C4C;
-      font-family: 'Jost', sans-serif;
-      font-size: 12px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      padding: 11px 28px;
-      cursor: pointer;
-      border-radius: 2px;
-      margin: 36px auto 0;
-      transition: border-color 0.2s, color 0.2s;
+    /* ── Step indicator ── */
+    .step-indicator {
+      display: none; align-items: center; gap: 8px; margin-bottom: 48px;
     }
-    .reset-btn:hover { border-color: #1A3A52; color: #141E28; }
-    .reset-btn.visible { display: block; }
+    .step-indicator.visible { display: flex; }
+    .step-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: #7A9AAC; opacity: 0.35; transition: opacity 0.4s, background 0.4s;
+    }
+    .step-dot.active { background: #2E5878; opacity: 1; }
+    .step-dot.done { background: #2E5878; opacity: 0.45; }
+    .step-line { flex: 1; height: 0.5px; background: #7A9AAC; opacity: 0.35; }
   </style>
 </head>
 <body>
-
   <div class="lagoon-bg"></div>
   <div class="sand-strip"></div>
   <div class="slate-rock-1"></div>
@@ -252,35 +256,59 @@
   <div class="content">
     <div class="room-name">The Reframe Room</div>
 
-    <h1>What are you<br><em>sitting with?</em></h1>
-
-    <p class="invitation">
-      Bring something real. A crossroads, a question, a weight you've been carrying.<br>
-      No judgment lives here — only possibilities.
-    </p>
-
-    <div class="input-area">
-      <textarea id="scenario" placeholder="Describe your situation or question..."></textarea>
+    <!-- Step indicator -->
+    <div class="step-indicator" id="stepIndicator">
+      <div class="step-dot" id="dot1"></div>
+      <div class="step-line"></div>
+      <div class="step-dot" id="dot2"></div>
+      <div class="step-line"></div>
+      <div class="step-dot" id="dot3"></div>
     </div>
 
-    <div class="input-footer">
-      <span class="word-count" id="wordCount">0 / 500 words</span>
-      <button class="enter-btn" id="enterBtn">Enter the room</button>
+    <!-- Step 1: Input -->
+    <div id="step1">
+      <h1>What are you<br><em>sitting with?</em></h1>
+      <p class="invitation">
+        Bring something real — a crossroads, a craving, a question you keep circling back to.<br>
+        Big or small, heavy or light. No judgment lives here — only possibilities.
+      </p>
+      <div class="input-area">
+        <textarea id="scenario" placeholder="A dilemma, a what-if, a fork in the road — serious or playful, it all belongs here..."></textarea>
+      </div>
+      <div class="input-footer">
+        <span class="word-count" id="wordCount">0 / 500 words</span>
+        <button class="enter-btn" id="enterBtn">Enter the room</button>
+      </div>
     </div>
 
     <div class="divider" id="divider"></div>
-
     <div class="loading-dots" id="loadingDots">
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div>
     </div>
 
+    <!-- Step 2: Three paths -->
     <div class="paths-section" id="pathsSection">
       <p class="paths-label">Three paths appear</p>
       <div id="pathsContainer"></div>
-      <button class="reset-btn" id="resetBtn">Begin again</button>
     </div>
+
+    <!-- Step 3: Chosen path deep-dive -->
+    <div class="deepen-section" id="deepenSection">
+      <p class="chosen-label">You chose</p>
+      <p class="chosen-path-name" id="chosenPathName"></p>
+      <div id="deepenContainer"></div>
+    </div>
+
+    <!-- Step 4: Closing -->
+    <div class="closing-section" id="closingSection">
+      <div class="closing-divider"></div>
+      <div class="closing-card">
+        <div class="closing-mark">&#x2767;</div>
+        <div class="closing-body" id="closingBody"></div>
+      </div>
+    </div>
+
+    <button class="reset-btn" id="resetBtn">Begin again</button>
 
     <p class="footer-note">These are possibilities, not prescriptions. What you do with them is entirely yours.</p>
   </div>
@@ -288,19 +316,18 @@
   <script>
     const WORKER_URL = 'https://reframe-room.lawrence-carrillo.workers.dev';
 
-    const SYSTEM_PROMPT = `You are The Reframe Room — a quietly curious thinking space. You are not a therapist, advisor, fortune teller, or decision-maker. You are a holder of possibilities.
+    const SYSTEM_PROMPT_PATHS = `You are The Reframe Room — a quietly curious thinking space. You are not a therapist, advisor, fortune teller, or decision-maker. You are a holder of possibilities.
 
-When a user shares a scenario or dilemma, your only job is to generate three distinct hypothetical paths they might consider. Each path should be specific and vivid enough to feel real, framed as possibility never prescription, honest about both realistic upsides and downsides, and completely neutral — no path is better, safer, bolder, or recommended.
+Questions can be big or small, heavy or light. Someone might bring a life-changing crossroads. Someone else might bring a question about adopting a pet, switching hobbies, or planning a trip. Both are equally welcome. Read the tone of what's shared and match it — playful questions deserve paths that are warm and a little fun; weightier ones deserve more care and depth. Never make a lighthearted question feel heavy, and never make a serious one feel trivial.
+
+When a user shares anything — a dilemma, a what-if, a curiosity, a fork in the road — your only job is to generate three distinct hypothetical paths they might consider. Each path should be specific and vivid enough to feel real, framed as possibility never prescription, honest about both realistic upsides and downsides, and completely neutral — no path is better, safer, bolder, or recommended.
 
 Never assume anything about who the user is — their age, gender, background, or identity.
-
 Never diagnose. Never prescribe. Never moralize.
 
 If a scenario suggests a crisis, emergency, or immediate danger, do not generate paths. Instead respond warmly and briefly — acknowledge them, and gently encourage them to reach out to a trusted person or appropriate professional support.
 
-Your tone is quietly curious. Warm but not coddling. Empathetic but neutral. Thoughtful but never heavy-handed.
-
-Format your response as exactly three paths. Each path has a short abstract evocative title — no numbers, no letters, no ordering language. Titles should feel like they belong to the same world, sharing quiet resonance without forcing a rhyme. Follow each title with 2-3 paragraphs exploring that possibility.
+Format your response as exactly three paths. Each path has a short evocative title — no numbers, no letters, no ordering language. For lighter questions, titles can be a little playful. For heavier ones, let them carry quiet weight. Follow each title with 2-3 paragraphs exploring that possibility.
 
 Use this exact format:
 TITLE: [evocative title]
@@ -312,6 +339,30 @@ BODY: [2-3 paragraphs]
 TITLE: [evocative title]
 BODY: [2-3 paragraphs]`;
 
+    const SYSTEM_PROMPT_DEEPEN = `You are The Reframe Room — a quietly curious thinking space. A person has shared a situation with you, and was shown three possible paths. They have chosen one path to explore more deeply.
+
+Your role now is to gently go deeper with them on this chosen path. Explore the texture of it — what it might feel like to actually live it, what quiet challenges might arise, what unexpected gifts it might hold, what inner resources it might call on. Do not push them toward it or away from it. Simply illuminate it with care and honesty.
+
+Match the tone of the original question. If it was lighthearted or playful, bring warmth and a little delight to your exploration. If it was serious or heavy, bring care and depth. Never over-dramatize a small question, and never minimize a real one.
+
+Write 3–4 paragraphs. Be specific and grounded. Avoid abstraction. Use language that feels real, not poetic for its own sake.
+
+Do not use any formatting markers. Just write the paragraphs, separated by blank lines.`;
+
+    const SYSTEM_PROMPT_CLOSING = `You are The Reframe Room. A person has just spent time exploring something — big or small — and chosen a path to go deeper on. The session is ending.
+
+Write a single closing thought — 2–3 sentences only. Match the weight of what they brought. For a lighthearted question, let the closing be warm and gently encouraging. For something heavier, let it feel like a quiet hand on the shoulder. Either way, acknowledge that whatever path they walk, it belongs to them.
+
+Do not be saccharine or over-inspirational. No clichés. No "you've got this." Speak with quiet sincerity.
+
+Write only the closing sentences. No preamble, no labels, no formatting.`;
+
+    // State
+    let userScenario = '';
+    let chosenPath = null;
+    let currentStep = 1;
+
+    // Elements
     const textarea = document.getElementById('scenario');
     const wordCountEl = document.getElementById('wordCount');
     const enterBtn = document.getElementById('enterBtn');
@@ -319,10 +370,53 @@ BODY: [2-3 paragraphs]`;
     const loadingDots = document.getElementById('loadingDots');
     const pathsSection = document.getElementById('pathsSection');
     const pathsContainer = document.getElementById('pathsContainer');
+    const deepenSection = document.getElementById('deepenSection');
+    const deepenContainer = document.getElementById('deepenContainer');
+    const chosenPathName = document.getElementById('chosenPathName');
+    const closingSection = document.getElementById('closingSection');
+    const closingBody = document.getElementById('closingBody');
     const resetBtn = document.getElementById('resetBtn');
+    const stepIndicator = document.getElementById('stepIndicator');
 
     function countWords(text) {
       return text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
+    }
+
+    function updateStepDots(step) {
+      stepIndicator.classList.toggle('visible', step > 1);
+      ['dot1','dot2','dot3'].forEach((id, i) => {
+        const dot = document.getElementById(id);
+        dot.className = 'step-dot';
+        if (i + 1 < step) dot.classList.add('done');
+        else if (i + 1 === step) dot.classList.add('active');
+      });
+    }
+
+    function showLoading() {
+      divider.classList.add('visible');
+      loadingDots.classList.add('active');
+    }
+
+    function hideLoading() {
+      loadingDots.classList.remove('active');
+    }
+
+    async function callClaude(systemPrompt, messages) {
+      const response = await fetch(WORKER_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-6',
+          max_tokens: 1200,
+          system: systemPrompt,
+          messages
+        })
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error?.message || 'API error ' + response.status);
+      const text = data.content?.find(b => b.type === 'text')?.text || '';
+      if (!text) throw new Error('Empty response');
+      return text;
     }
 
     textarea.addEventListener('input', () => {
@@ -335,43 +429,30 @@ BODY: [2-3 paragraphs]`;
     enterBtn.addEventListener('click', handleSubmit);
     resetBtn.addEventListener('click', handleReset);
 
+    // ── Step 1 → Step 2 ──
     async function handleSubmit() {
-      const scenario = textarea.value.trim();
-      if (!scenario) return;
+      userScenario = textarea.value.trim();
+      if (!userScenario) return;
 
       enterBtn.disabled = true;
       textarea.disabled = true;
-      divider.classList.add('visible');
-      loadingDots.classList.add('active');
+      showLoading();
       pathsSection.classList.remove('visible');
       pathsContainer.innerHTML = '';
-      resetBtn.classList.remove('visible');
+      currentStep = 2;
+      updateStepDots(2);
 
       try {
-        const response = await fetch(WORKER_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            model: 'claude-sonnet-4-6',
-            max_tokens: 1000,
-            system: SYSTEM_PROMPT,
-            messages: [{ role: 'user', content: scenario }]
-          })
-        });
-
-        const data = await response.json();
-        if (!response.ok) throw new Error(data.error?.message || 'API error ' + response.status);
-        const text = data.content?.find(b => b.type === 'text')?.text || '';
-        if (!text) throw new Error('Empty response');
+        const text = await callClaude(SYSTEM_PROMPT_PATHS, [
+          { role: 'user', content: userScenario }
+        ]);
         renderPaths(text);
-
       } catch (err) {
         pathsContainer.innerHTML = `<p class="error-msg">Something quiet went wrong — ${err.message}. Take a breath and try again.</p>`;
         pathsSection.classList.add('visible');
         resetBtn.classList.add('visible');
       }
-
-      loadingDots.classList.remove('active');
+      hideLoading();
     }
 
     function renderPaths(text) {
@@ -388,18 +469,90 @@ BODY: [2-3 paragraphs]`;
       if (paths.length === 0) {
         pathsContainer.innerHTML = `<p class="error-msg">The room is still forming. Try again in a moment.</p>`;
       } else {
-        pathsContainer.innerHTML = paths.map(p => `
-          <div class="path-card">
+        pathsContainer.innerHTML = paths.map((p, i) => `
+          <div class="path-card" data-index="${i}" data-title="${p.title.replace(/"/g,'&quot;')}">
+            <span class="path-choose-hint">Choose this path</span>
             <h2 class="path-title">${p.title}</h2>
             <div class="path-body">${p.body.split(/\n\n+/).map(para => `<p>${para.trim()}</p>`).join('')}</div>
           </div>
         `).join('');
+
+        // Attach click listeners
+        pathsContainer.querySelectorAll('.path-card').forEach(card => {
+          card.addEventListener('click', () => {
+            const title = card.getAttribute('data-title');
+            handlePathChosen(title);
+          });
+        });
       }
 
       pathsSection.classList.add('visible');
-      resetBtn.classList.add('visible');
     }
 
+    // ── Step 2 → Step 3 ──
+    async function handlePathChosen(pathTitle) {
+      chosenPath = pathTitle;
+      chosenPathName.textContent = pathTitle;
+
+      // Fade out cards, show chosen label
+      pathsSection.style.opacity = '0.35';
+      pathsSection.style.pointerEvents = 'none';
+
+      deepenSection.classList.remove('visible');
+      deepenContainer.innerHTML = '';
+      showLoading();
+      currentStep = 3;
+      updateStepDots(3);
+
+      try {
+        const text = await callClaude(SYSTEM_PROMPT_DEEPEN, [
+          { role: 'user', content: `My situation: ${userScenario}\n\nThe path I chose: "${pathTitle}"` }
+        ]);
+        renderDeepen(text);
+        await fetchClosing(pathTitle);
+      } catch (err) {
+        deepenContainer.innerHTML = `<p class="error-msg">Something quiet went wrong — ${err.message}. Take a breath and try again.</p>`;
+        deepenSection.classList.add('visible');
+        resetBtn.classList.add('visible');
+      }
+      hideLoading();
+    }
+
+    function renderDeepen(text) {
+      const paragraphs = text.split(/\n\n+/).filter(p => p.trim());
+      deepenContainer.innerHTML = `
+        <div class="deepen-card">
+          <div class="deepen-body">
+            ${paragraphs.map(p => `<p>${p.trim()}</p>`).join('')}
+          </div>
+        </div>
+      `;
+      deepenSection.classList.add('visible');
+      deepenSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // ── Step 3 → Step 4 ──
+    async function fetchClosing(pathTitle) {
+      try {
+        const text = await callClaude(SYSTEM_PROMPT_CLOSING, [
+          {
+            role: 'user',
+            content: `Situation: ${userScenario}\n\nChosen path: "${pathTitle}"\n\nPlease write the closing.`
+          }
+        ]);
+        closingBody.textContent = text.trim();
+        closingSection.classList.add('visible');
+        resetBtn.classList.add('visible');
+        setTimeout(() => {
+          closingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 600);
+      } catch (err) {
+        // Closing is a nice-to-have — fail silently, still show reset
+        resetBtn.classList.add('visible');
+      }
+    }
+
+    // ── Reset ──
     function handleReset() {
       textarea.value = '';
       textarea.disabled = false;
@@ -407,12 +560,28 @@ BODY: [2-3 paragraphs]`;
       wordCountEl.className = 'word-count';
       enterBtn.disabled = false;
       divider.classList.remove('visible');
-      pathsSection.classList.remove('visible');
-      resetBtn.classList.remove('visible');
-      pathsContainer.innerHTML = '';
       loadingDots.classList.remove('active');
+
+      pathsSection.classList.remove('visible');
+      pathsSection.style.opacity = '';
+      pathsSection.style.pointerEvents = '';
+      pathsContainer.innerHTML = '';
+
+      deepenSection.classList.remove('visible');
+      deepenContainer.innerHTML = '';
+      chosenPathName.textContent = '';
+
+      closingSection.classList.remove('visible');
+      closingBody.textContent = '';
+
+      resetBtn.classList.remove('visible');
+      stepIndicator.classList.remove('visible');
+      currentStep = 1;
+      userScenario = '';
+      chosenPath = null;
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   </script>
-
 </body>
 </html>
