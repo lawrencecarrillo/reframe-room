@@ -21,7 +21,7 @@ export default {
           "content-type": "application/json",
         },
         body: JSON.stringify({
-          model: body.model || "claude-sonnet-4-6",
+          model: body.model,
           max_tokens: body.max_tokens || 1024,
           system: body.system,
           messages: body.messages,
@@ -29,7 +29,10 @@ export default {
       });
 
       const data = await response.json();
+      
+      // Return the full raw response so we can see what's happening
       return new Response(JSON.stringify(data), {
+        status: response.status,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
 
