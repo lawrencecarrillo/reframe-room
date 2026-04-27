@@ -110,8 +110,8 @@
     .step-dot.done { background: #2E5878; opacity: 0.45; }
     .step-line { flex: 1; height: 0.5px; background: #7A9AAC; opacity: 0.35; }
 
-    .paths-section { opacity: 0; transform: translateY(16px); transition: opacity 0.7s, transform 0.7s; }
-    .paths-section.visible { opacity: 1; transform: translateY(0); }
+    .paths-section { display: none; opacity: 0; transform: translateY(16px); transition: opacity 0.7s, transform 0.7s; }
+    .paths-section.visible { display: block; opacity: 1; transform: translateY(0); }
 
     .paths-label { font-family: 'Jost', sans-serif; font-size: 11px; letter-spacing: 0.22em; color: #2E4A60; text-transform: uppercase; margin-bottom: 36px; }
 
@@ -127,8 +127,8 @@
     .path-body p { margin-bottom: 14px; }
     .path-body p:last-child { margin-bottom: 0; }
 
-    .deepen-section { opacity: 0; transform: translateY(16px); transition: opacity 0.7s, transform 0.7s; margin-top: 8px; }
-    .deepen-section.visible { opacity: 1; transform: translateY(0); }
+    .deepen-section { display: none; opacity: 0; transform: translateY(16px); transition: opacity 0.7s, transform 0.7s; margin-top: 8px; }
+    .deepen-section.visible { display: block; opacity: 1; transform: translateY(0); }
 
     .chosen-label { font-family: 'Jost', sans-serif; font-size: 11px; letter-spacing: 0.22em; color: #2E4A60; text-transform: uppercase; margin-bottom: 12px; }
     .chosen-path-name { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 34px; color: #1A3A52; margin-bottom: 36px; font-style: italic; }
@@ -138,22 +138,22 @@
     .deepen-body p { margin-bottom: 16px; }
     .deepen-body p:last-child { margin-bottom: 0; }
 
-    .closing-section { opacity: 0; transform: translateY(16px); transition: opacity 0.7s, transform 0.7s; margin-top: 8px; }
-    .closing-section.visible { opacity: 1; transform: translateY(0); }
+    .closing-section { display: none; opacity: 0; transform: translateY(16px); transition: opacity 0.7s, transform 0.7s; margin-top: 8px; }
+    .closing-section.visible { display: block; opacity: 1; transform: translateY(0); }
     .closing-divider { height: 0.5px; background: #7A9AAC; margin: 44px 0; opacity: 0.4; }
     .closing-card { background: rgba(218, 228, 236, 0.55); border: 0.5px solid #7A9AAC; border-radius: 3px; padding: 36px 40px; text-align: center; }
     .closing-mark { font-family: 'Cormorant Garamond', serif; font-size: 28px; color: #7A9AAC; margin-bottom: 20px; opacity: 0.7; }
     .closing-body { font-family: 'Cormorant Garamond', serif; font-size: 20px; line-height: 1.85; color: #1E3244; font-weight: 300; font-style: italic; }
 
     /* Feature 4: Unexpected path */
-    .unexpected-trigger { display: none; text-align: center; margin-top: 44px; }
-    .unexpected-trigger.visible { display: block; }
-    .unexpected-btn { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-style: italic; color: #2E5878; background: none; border: 0.5px solid #7A9AAC; border-radius: 3px; padding: 14px 28px; cursor: pointer; transition: border-color 0.2s, color 0.2s, transform 0.15s; }
-    .unexpected-btn:hover { border-color: #2E5878; color: #1A3A52; transform: translateY(-1px); }
+    .unexpected-trigger { text-align: center; margin-top: 52px; opacity: 0; transition: opacity 1.2s ease; pointer-events: none; }
+    .unexpected-trigger.visible { opacity: 1; pointer-events: auto; }
+    .unexpected-btn { font-family: 'Cormorant Garamond', serif; font-size: 19px; font-style: italic; color: #1A3A52; background: rgba(232, 224, 208, 0.65); border: 1px solid #5A8AA0; border-radius: 3px; padding: 18px 36px; cursor: pointer; transition: background 0.2s, border-color 0.2s, transform 0.2s; }
+    .unexpected-btn:hover { background: rgba(232, 224, 208, 0.9); border-color: #1A3A52; transform: translateY(-2px); }
     .unexpected-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
 
-    .unexpected-section { opacity: 0; transform: translateY(16px); transition: opacity 0.7s, transform 0.7s; margin-top: 36px; }
-    .unexpected-section.visible { opacity: 1; transform: translateY(0); }
+    .unexpected-section { display: none; opacity: 0; transform: translateY(16px); transition: opacity 0.7s, transform 0.7s; margin-top: 36px; }
+    .unexpected-section.visible { display: block; opacity: 1; transform: translateY(0); }
     .unexpected-label { font-family: 'Jost', sans-serif; font-size: 11px; letter-spacing: 0.22em; color: #2E4A60; text-transform: uppercase; margin-bottom: 36px; }
     .unexpected-card { background: rgba(224, 218, 205, 0.82); border: 0.5px solid #5A7A8C; border-left: 2px solid #5A8AA0; border-radius: 3px; padding: 32px 36px; }
 
@@ -239,7 +239,7 @@
 
     <!-- Feature 4: Unexpected path -->
     <div class="unexpected-trigger" id="unexpectedTrigger">
-      <button class="unexpected-btn" id="unexpectedBtn">Show me the path I haven't considered</button>
+      <button class="unexpected-btn" id="unexpectedBtn">One more — the unexpected one.</button>
     </div>
     <div class="unexpected-section" id="unexpectedSection">
       <p class="unexpected-label">A path outside the frame</p>
@@ -315,7 +315,15 @@ Format:
 TITLE: [evocative title — should feel distinct from the first three]
 BODY: [2-3 paragraphs]`;
 
-    /* State */
+    /* Show section helper — sets display then fades in */
+    function showSection(el) {
+      el.style.display = 'block';
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => el.classList.add('visible'));
+      });
+    }
+
+        /* State */
     let userScenario = '';
     let clarifyAnswerText = '';
     let chosenPath = null;
@@ -448,7 +456,7 @@ BODY: [2-3 paragraphs]`;
       setTimeout(() => { clarifySection.style.display = 'none'; }, 400);
 
       showLoading();
-      pathsSection.classList.remove('visible');
+      pathsSection.classList.remove('visible'); pathsSection.style.display = '';
       pathsContainer.innerHTML = '';
       updateStepDots(2);
 
@@ -461,7 +469,7 @@ BODY: [2-3 paragraphs]`;
         renderPaths(text);
       } catch (e) {
         pathsContainer.innerHTML = `<p class="error-msg">Something quiet went wrong — ${e.message}. Take a breath and try again.</p>`;
-        pathsSection.classList.add('visible');
+        showSection(pathsSection);
         resetBtn.classList.add('visible');
       }
       hideLoading();
@@ -489,7 +497,7 @@ BODY: [2-3 paragraphs]`;
           card.addEventListener('click', () => handlePathChosen(card.getAttribute('data-title')));
         });
       }
-      pathsSection.classList.add('visible');
+      showSection(pathsSection);
     }
 
     async function handlePathChosen(pathTitle) {
@@ -498,7 +506,7 @@ BODY: [2-3 paragraphs]`;
       pathsSection.style.opacity = '0.35';
       pathsSection.style.pointerEvents = 'none';
 
-      deepenSection.classList.remove('visible');
+      deepenSection.classList.remove('visible'); deepenSection.style.display = '';
       deepenContainer.innerHTML = '';
       showLoading();
       updateStepDots(3);
@@ -511,12 +519,12 @@ BODY: [2-3 paragraphs]`;
         const text = await callClaude(SYSTEM_PROMPT_DEEPEN, [{ role: 'user', content: context }]);
         const paras = text.split(/\n\n+/).filter(p => p.trim());
         deepenContainer.innerHTML = `<div class="deepen-card"><div class="deepen-body">${paras.map(p => `<p>${p.trim()}</p>`).join('')}</div></div>`;
-        deepenSection.classList.add('visible');
+        showSection(deepenSection);
         deepenSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
         await fetchClosing(pathTitle);
       } catch (e) {
         deepenContainer.innerHTML = `<p class="error-msg">Something quiet went wrong — ${e.message}. Take a breath and try again.</p>`;
-        deepenSection.classList.add('visible');
+        showSection(deepenSection);
         resetBtn.classList.add('visible');
       }
       hideLoading();
@@ -530,12 +538,12 @@ BODY: [2-3 paragraphs]`;
 
         const text = await callClaude(SYSTEM_PROMPT_CLOSING, [{ role: 'user', content: ctx }]);
         closingBody.textContent = text.trim();
-        closingSection.classList.add('visible');
-        unexpectedTrigger.classList.add('visible');
+        showSection(closingSection);
+        setTimeout(() => unexpectedTrigger.classList.add('visible'), 2000);
         resetBtn.classList.add('visible');
         setTimeout(() => closingSection.scrollIntoView({ behavior: 'smooth', block: 'start' }), 600);
       } catch (e) {
-        unexpectedTrigger.classList.add('visible');
+        setTimeout(() => unexpectedTrigger.classList.add('visible'), 2000);
         resetBtn.classList.add('visible');
       }
     }
@@ -544,7 +552,7 @@ BODY: [2-3 paragraphs]`;
     unexpectedBtn.addEventListener('click', async () => {
       unexpectedBtn.disabled = true;
       unexpectedContainer.innerHTML = `<div class="loading-dots active" style="padding:24px 0"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>`;
-      unexpectedSection.classList.add('visible');
+      showSection(unexpectedSection);
 
       const ctx = clarifyAnswerText
         ? `Situation: ${userScenario}\n\nThey also shared: ${clarifyAnswerText}\n\nChosen path: "${chosenPath}"`
@@ -580,14 +588,14 @@ BODY: [2-3 paragraphs]`;
 
       divider.classList.remove('visible'); loadingDots.classList.remove('active');
 
-      pathsSection.classList.remove('visible'); pathsSection.style.opacity = ''; pathsSection.style.pointerEvents = '';
+      pathsSection.classList.remove('visible'); pathsSection.style.display = ''; pathsSection.style.opacity = ''; pathsSection.style.pointerEvents = '';
       pathsContainer.innerHTML = '';
 
-      deepenSection.classList.remove('visible'); deepenContainer.innerHTML = ''; chosenPathName.textContent = '';
-      closingSection.classList.remove('visible'); closingBody.textContent = '';
+      deepenSection.classList.remove('visible'); deepenSection.style.display = ''; deepenContainer.innerHTML = ''; chosenPathName.textContent = '';
+      closingSection.classList.remove('visible'); closingSection.style.display = ''; closingBody.textContent = '';
 
       unexpectedTrigger.classList.remove('visible'); unexpectedBtn.disabled = false;
-      unexpectedSection.classList.remove('visible'); unexpectedContainer.innerHTML = '';
+      unexpectedSection.classList.remove('visible'); unexpectedSection.style.display = ''; unexpectedContainer.innerHTML = '';
 
       resetBtn.classList.remove('visible'); stepIndicator.classList.remove('visible');
 
