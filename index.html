@@ -93,10 +93,10 @@
     .reset-btn:hover { border-color: #1A3A52; color: #141E28; }
     .reset-btn.visible { display: block; }
 
-    .divider { height: 0.5px; background: #7A9AAC; margin: 52px 0; opacity: 0; transition: opacity 0.6s; }
-    .divider.visible { opacity: 0.5; }
+    .divider { height: 0.5px; background: #7A9AAC; margin: 0; max-height: 0; opacity: 0; transition: opacity 0.6s, margin 0.6s, max-height 0.6s; }
+    .divider.visible { opacity: 0.5; margin: 52px 0; max-height: 1px; }
 
-    .loading-dots { display: none; gap: 8px; align-items: center; justify-content: center; padding: 40px 0; }
+    .loading-dots { display: none; gap: 8px; align-items: center; justify-content: center; padding: 40px 0; margin: 0; }
     .loading-dots.active { display: flex; }
     .dot { width: 6px; height: 6px; border-radius: 50%; background: #2E5878; animation: pulse 1.6s ease-in-out infinite; }
     .dot:nth-child(2) { animation-delay: 0.25s; }
@@ -159,7 +159,7 @@
 
     .error-msg { font-family: 'Cormorant Garamond', serif; font-style: italic; color: #5A7A8C; font-size: 17px; padding: 20px 0; }
 
-    .footer-note { font-family: 'Cormorant Garamond', serif; font-size: 14px; font-style: italic; color: #4A6A7C; text-align: center; margin-top: 64px; padding-top: 32px; border-top: 0.5px solid rgba(122, 154, 172, 0.45); }
+    .footer-note { font-family: 'Cormorant Garamond', serif; font-size: 14px; font-style: italic; color: #4A6A7C; text-align: center; margin-top: 32px; padding-top: 24px; border-top: 0.5px solid rgba(122, 154, 172, 0.45); }
 
     /* ── Mobile ── */
     @media (max-width: 600px) {
