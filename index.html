@@ -205,6 +205,16 @@
       .room-option { min-width: unset; }
     }
 
+
+    /* Room hint */
+    .room-hint {
+      font-family: 'Cormorant Garamond', serif; font-size: 15px;
+      font-style: italic; color: #5A7A8C;
+      min-height: 22px; margin-bottom: 12px;
+      opacity: 0; transition: opacity 0.4s;
+    }
+    .room-hint.visible { opacity: 1; }
+
     .error-msg { font-family: 'Cormorant Garamond', serif; font-style: italic; color: #5A7A8C; font-size: 17px; padding: 20px 0; }
 
     .footer-note { font-family: 'Cormorant Garamond', serif; font-size: 14px; font-style: italic; color: #4A6A7C; text-align: center; margin-top: 32px; padding-top: 24px; border-top: 0.5px solid rgba(122, 154, 172, 0.45); }
@@ -392,6 +402,7 @@
         </div>
       </div>
 
+      <p class="room-hint" id="roomHint"></p>
       <p class="tone-line" id="toneLine"></p>
       <div class="input-area">
         <textarea id="scenario" placeholder="A dilemma, a what-if, a fork in the road — serious or playful, it all belongs here..."></textarea>
@@ -585,6 +596,7 @@ BODY: [2-3 paragraphs]`
     const wordCountEl       = document.getElementById('wordCount');
     const enterBtn          = document.getElementById('enterBtn');
     const toneLineEl        = document.getElementById('toneLine');
+    const roomHintEl        = document.getElementById('roomHint');
     const clarifySection    = document.getElementById('clarifySection');
     const clarifyQuestionEl = document.getElementById('clarifyQuestion');
     const clarifyAnswerEl   = document.getElementById('clarifyAnswer');
@@ -639,20 +651,39 @@ BODY: [2-3 paragraphs]`
 
 
     /* Room selector */
+    function updateRoomHint() {
+      const words = countWords(textarea.value);
+      const minWords = (activeRoom === 'quiet') ? 1 : 15;
+      if (activeRoom !== 'quiet') {
+        roomHintEl.textContent = 'This room works best with a little more context — aim for a few sentences.';
+        roomHintEl.classList.add('visible');
+      } else {
+        roomHintEl.textContent = '';
+        roomHintEl.classList.remove('visible');
+      }
+      enterBtn.disabled = words === 0 || words > 500 || words < minWords;
+      // Update word count display
+      const remaining = minWords > 1 && words < minWords ? ` (${minWords - words} more words needed)` : '';
+      wordCountEl.textContent = words + ' / 500 words' + remaining;
+    }
+
     document.querySelectorAll('.room-option').forEach(option => {
       option.addEventListener('click', () => {
         document.querySelectorAll('.room-option').forEach(o => o.classList.remove('active'));
         option.classList.add('active');
         activeRoom = option.getAttribute('data-room');
+        updateRoomHint();
       });
     });
 
     /* Feature 1: Live tone read */
     textarea.addEventListener('input', () => {
       const words = countWords(textarea.value);
-      wordCountEl.textContent = words + ' / 500 words';
+            const minWords = (activeRoom === 'quiet') ? 1 : 15;
+      const remaining = minWords > 1 && words < minWords ? ` (${minWords - words} more words needed)` : '';
+      wordCountEl.textContent = words + ' / 500 words' + remaining;
       wordCountEl.className = 'word-count' + (words > 450 ? ' near' : '') + (words > 500 ? ' over' : '');
-      enterBtn.disabled = words === 0 || words > 500;
+      enterBtn.disabled = words === 0 || words > 500 || words < minWords;
 
       clearTimeout(toneTimer);
       if (toneController) toneController.abort();
@@ -873,6 +904,7 @@ BODY: [2-3 paragraphs]`
       resetBtn.classList.remove('visible'); stepIndicator.classList.remove('visible');
 
       userScenario = ''; clarifyAnswerText = ''; chosenPath = null; activeRoom = 'quiet';
+      roomHintEl.textContent = ''; roomHintEl.classList.remove('visible');
       document.querySelectorAll('.room-option').forEach(o => o.classList.remove('active'));
       document.querySelector('[data-room="quiet"]').classList.add('active');
       window.scrollTo({ top: 0, behavior: 'smooth' });
