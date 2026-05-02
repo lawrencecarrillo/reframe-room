@@ -12,7 +12,7 @@ People hit moments of being stuck — a decision they keep circling, a weight th
 
 ## The User
 
-**Marcus, 38.** Project manager, Brooklyn. Offered a promotion three weeks ago — more money, less time with his kids. He's talked to his wife, his brother, his best friend. Every conversation adds another opinion to the pile. He doesn't want more input. He wants to see the decision differently. He opens The Reframe Room at 11pm when the house is quiet.
+**Dave, 38.** Project manager, Brooklyn. Offered a promotion three weeks ago — more money, less time with his kids. He's talked to his wife, his brother, his best friend. Every conversation adds another opinion to the pile. He doesn't want more input. He wants to see the decision differently. He opens The Reframe Room at 11pm when the house is quiet.
 
 ## The Solution
 
