@@ -43,7 +43,7 @@
       text-transform: uppercase; margin-bottom: 48px;
       display: flex; align-items: center; gap: 12px;
     }
-    .room-name::after { content: ''; flex: 1; height: 0.5px; background: #7A9AAC; opacity: 0.6; }
+    .room-name::after { display: none; }
 
     h1 { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 52px; line-height: 1.1; color: #141E28; margin-bottom: 22px; letter-spacing: -0.01em; }
     h1 em { font-style: italic; color: #2E5878; }
@@ -229,6 +229,8 @@
     .room-name-wrap {
       position: relative; display: flex;
       align-items: center; margin-bottom: 48px;
+      border-bottom: 0.5px solid rgba(122, 154, 172, 0.6);
+      padding-bottom: 12px;
     }
     .room-name-wrap .room-name { margin-bottom: 0; flex: 1; }
 
