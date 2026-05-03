@@ -215,6 +215,76 @@
     }
     .room-hint.visible { opacity: 1; }
 
+
+    /* ── Past Sessions ── */
+    .sessions-toggle {
+      font-family: 'Jost', sans-serif; font-size: 11px;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: #5A7A8C; background: none; border: none;
+      cursor: pointer; padding: 0; transition: color 0.2s;
+      position: absolute; top: 0; right: 0;
+    }
+    .sessions-toggle:hover { color: #1A3A52; }
+
+    .room-name-wrap {
+      position: relative; display: flex;
+      align-items: center; margin-bottom: 48px;
+    }
+    .room-name-wrap .room-name { margin-bottom: 0; flex: 1; }
+
+    .sessions-panel {
+      display: none;
+      background: rgba(240, 236, 226, 0.85);
+      border: 0.5px solid #7A9AAC; border-radius: 3px;
+      padding: 28px 32px; margin-bottom: 40px;
+      animation: panelFade 0.4s ease;
+    }
+    .sessions-panel.open { display: block; }
+    @keyframes panelFade { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+
+    .sessions-panel-header {
+      display: flex; justify-content: space-between;
+      align-items: center; margin-bottom: 24px;
+    }
+    .sessions-panel-title {
+      font-family: 'Jost', sans-serif; font-size: 11px;
+      letter-spacing: 0.22em; text-transform: uppercase; color: #2E4A60;
+    }
+    .sessions-clear {
+      font-family: 'Jost', sans-serif; font-size: 11px;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: #7A9AAC; background: none; border: none;
+      cursor: pointer; transition: color 0.2s;
+    }
+    .sessions-clear:hover { color: #7B2A1A; }
+
+    .session-entry {
+      border-top: 0.5px solid rgba(122, 154, 172, 0.4);
+      padding: 16px 0;
+    }
+    .session-entry:first-of-type { border-top: none; padding-top: 0; }
+
+    .session-meta {
+      font-family: 'Jost', sans-serif; font-size: 11px;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: #7A9AAC; margin-bottom: 6px;
+    }
+    .session-situation {
+      font-family: 'Cormorant Garamond', serif; font-size: 17px;
+      color: #1A2A38; font-weight: 400; margin-bottom: 4px;
+      line-height: 1.5;
+    }
+    .session-path {
+      font-family: 'Cormorant Garamond', serif; font-size: 15px;
+      color: #2E5878; font-style: italic;
+    }
+
+    .sessions-empty {
+      font-family: 'Cormorant Garamond', serif; font-size: 17px;
+      font-style: italic; color: #7A9AAC; text-align: center;
+      padding: 12px 0;
+    }
+
     .error-msg { font-family: 'Cormorant Garamond', serif; font-style: italic; color: #5A7A8C; font-size: 17px; padding: 20px 0; }
 
     .footer-note { font-family: 'Cormorant Garamond', serif; font-size: 14px; font-weight: 400; font-style: italic; color: #4A6A7C; text-align: center; margin-top: 32px; padding-top: 24px; border-top: 0.5px solid rgba(122, 154, 172, 0.45); }
@@ -365,7 +435,18 @@
   <div class="vine-left"></div><div class="vine-right"></div>
 
   <div class="content">
-    <div class="room-name">The Reframe Room</div>
+    <div class="room-name-wrap">
+      <div class="room-name">The Reframe Room</div>
+      <button class="sessions-toggle" id="sessionsToggle">Your sessions</button>
+    </div>
+
+    <div class="sessions-panel" id="sessionsPanel">
+      <div class="sessions-panel-header">
+        <span class="sessions-panel-title">Past Sessions</span>
+        <button class="sessions-clear" id="sessionsClear">Clear all</button>
+      </div>
+      <div id="sessionsList"></div>
+    </div>
 
     <div class="step-indicator" id="stepIndicator">
       <div class="step-dot" id="dot1"></div>
@@ -584,6 +665,55 @@ BODY: [2-3 paragraphs]`
 
     let activeRoom = 'quiet';
 
+
+    /* ── localStorage session history ── */
+    const SESSIONS_KEY = 'reframe_sessions';
+
+    function loadSessions() {
+      try {
+        return JSON.parse(localStorage.getItem(SESSIONS_KEY)) || [];
+      } catch { return []; }
+    }
+
+    function saveSession(session) {
+      try {
+        const sessions = loadSessions();
+        sessions.unshift(session); // newest first
+        if (sessions.length > 20) sessions.pop(); // cap at 20
+        localStorage.setItem(SESSIONS_KEY, JSON.stringify(sessions));
+      } catch (e) { console.warn('Could not save session:', e); }
+    }
+
+    function clearSessions() {
+      try { localStorage.removeItem(SESSIONS_KEY); } catch {}
+    }
+
+    function renderSessions() {
+      const sessions = loadSessions();
+      const list = document.getElementById('sessionsList');
+      if (!sessions.length) {
+        list.innerHTML = '<p class="sessions-empty">No sessions yet. Your next reframe will appear here.</p>';
+        return;
+      }
+      list.innerHTML = sessions.map(s => `
+        <div class="session-entry">
+          <p class="session-meta">${s.date} &nbsp;·&nbsp; ${s.room}</p>
+          <p class="session-situation">"${s.situation.length > 120 ? s.situation.slice(0, 120) + '…' : s.situation}"</p>
+          <p class="session-path">→ ${s.chosenPath}</p>
+        </div>
+      `).join('');
+    }
+
+    function formatRoom(room) {
+      if (room === 'values') return 'The Values Room';
+      if (room === 'practical') return 'The Practical Room';
+      return 'The Quiet Room';
+    }
+
+    function formatDate() {
+      return new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    }
+
     /* State */
     let userScenario = '';
     let clarifyAnswerText = '';
@@ -674,6 +804,24 @@ BODY: [2-3 paragraphs]`
         activeRoom = option.getAttribute('data-room');
         updateRoomHint();
       });
+    });
+
+
+    /* Sessions panel toggle */
+    const sessionsToggle  = document.getElementById('sessionsToggle');
+    const sessionsPanel   = document.getElementById('sessionsPanel');
+    const sessionsClearBtn = document.getElementById('sessionsClear');
+
+    sessionsToggle.addEventListener('click', () => {
+      const isOpen = sessionsPanel.classList.contains('open');
+      if (!isOpen) renderSessions();
+      sessionsPanel.classList.toggle('open');
+      sessionsToggle.textContent = isOpen ? 'Your sessions' : 'Close';
+    });
+
+    sessionsClearBtn.addEventListener('click', () => {
+      clearSessions();
+      renderSessions();
     });
 
     /* Feature 1: Live tone read */
@@ -904,6 +1052,7 @@ BODY: [2-3 paragraphs]`
       resetBtn.classList.remove('visible'); stepIndicator.classList.remove('visible');
 
       userScenario = ''; clarifyAnswerText = ''; chosenPath = null; activeRoom = 'quiet';
+      sessionsPanel.classList.remove('open'); sessionsToggle.textContent = 'Your sessions';
       roomHintEl.textContent = ''; roomHintEl.classList.remove('visible');
       document.querySelectorAll('.room-option').forEach(o => o.classList.remove('active'));
       document.querySelector('[data-room="quiet"]').classList.add('active');
