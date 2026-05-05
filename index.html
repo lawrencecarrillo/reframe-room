@@ -287,6 +287,21 @@
       padding: 12px 0;
     }
 
+
+    /* Save session button */
+    .save-session-wrap { text-align: center; margin-top: 20px; display: none; }
+    .save-session-wrap.visible { display: block; }
+    .save-btn {
+      font-family: 'Jost', sans-serif; font-size: 12px;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: #2E5878; background: none;
+      border: 0.5px solid #7A9AAC; border-radius: 2px;
+      padding: 11px 28px; cursor: pointer;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .save-btn:hover { border-color: #2E5878; background: rgba(46, 88, 120, 0.06); }
+    .save-btn.saved { color: #2E7D5A; border-color: #2E7D5A; cursor: default; }
+
     .error-msg { font-family: 'Cormorant Garamond', serif; font-style: italic; color: #5A7A8C; font-size: 17px; padding: 20px 0; }
 
     .footer-note { font-family: 'Cormorant Garamond', serif; font-size: 14px; font-weight: 400; font-style: italic; color: #4A6A7C; text-align: center; margin-top: 32px; padding-top: 24px; border-top: 0.5px solid rgba(122, 154, 172, 0.45); }
@@ -539,6 +554,11 @@
       </div>
     </div>
 
+    <!-- Save session -->
+    <div class="save-session-wrap" id="saveSessionWrap">
+      <button class="save-btn" id="saveBtn">Save this session</button>
+    </div>
+
     <!-- Feature 4: Unexpected path -->
     <div class="unexpected-trigger" id="unexpectedTrigger">
       <button class="unexpected-btn" id="unexpectedBtn">One more — the unexpected one.</button>
@@ -746,6 +766,8 @@ BODY: [2-3 paragraphs]`
     const closingSection    = document.getElementById('closingSection');
     const closingBody       = document.getElementById('closingBody');
     const unexpectedTrigger = document.getElementById('unexpectedTrigger');
+    const saveSessionWrap   = document.getElementById('saveSessionWrap');
+    const saveBtn           = document.getElementById('saveBtn');
     const unexpectedBtn     = document.getElementById('unexpectedBtn');
     const unexpectedSection = document.getElementById('unexpectedSection');
     const unexpectedContainer = document.getElementById('unexpectedContainer');
@@ -824,6 +846,21 @@ BODY: [2-3 paragraphs]`
     sessionsClearBtn.addEventListener('click', () => {
       clearSessions();
       renderSessions();
+    });
+
+
+    /* Save session button */
+    saveBtn.addEventListener('click', () => {
+      if (saveBtn.classList.contains('saved')) return;
+      saveSession({
+        date: formatDate(),
+        room: formatRoom(activeRoom),
+        situation: userScenario,
+        chosenPath: chosenPath,
+        closing: closingBody.textContent
+      });
+      saveBtn.textContent = 'Session saved ✓';
+      saveBtn.classList.add('saved');
     });
 
     /* Feature 1: Live tone read */
@@ -1055,6 +1092,7 @@ BODY: [2-3 paragraphs]`
 
       userScenario = ''; clarifyAnswerText = ''; chosenPath = null; activeRoom = 'quiet';
       sessionsPanel.classList.remove('open'); sessionsToggle.textContent = 'Your sessions';
+      saveSessionWrap.classList.remove('visible'); saveBtn.classList.remove('saved'); saveBtn.textContent = 'Save this session';
       roomHintEl.textContent = ''; roomHintEl.classList.remove('visible');
       document.querySelectorAll('.room-option').forEach(o => o.classList.remove('active'));
       document.querySelector('[data-room="quiet"]').classList.add('active');
