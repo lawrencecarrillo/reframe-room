@@ -1032,6 +1032,9 @@ BODY: [2-3 paragraphs]`
         showSection(closingSection);
         setTimeout(() => unexpectedTrigger.classList.add('visible'), 2000);
         resetBtn.classList.add('visible');
+        saveSessionWrap.classList.add('visible');
+        saveBtn.textContent = 'Save this session';
+        saveBtn.classList.remove('saved');
         setTimeout(() => closingSection.scrollIntoView({ behavior: 'smooth', block: 'start' }), 600);
       } catch (e) {
         setTimeout(() => unexpectedTrigger.classList.add('visible'), 2000);
